@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/openaire/EPrints-OAPiwik:
+      branch: master
+      repo: https://github.com/openaire/EPrints-OAPiwik
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/openaire/EPrints-OAPiwik git:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-turquoise-okapi.sh
+        container: qc.acc_goopy-copper-mouse
+  QC.Doc:
+    repos:
+      github.com/openaire/EPrints-OAPiwik find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-maroon-numbat.sh
+        container: qc.doc_dorky-maroon-blue
+      github.com/openaire/EPrints-OAPiwik git:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-auburn-macaque.sh
+        container: qc.doc_goopy-myrtle-shark
+      github.com/openaire/EPrints-OAPiwik markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-green-squid.sh
+        container: qc.doc_goopy-cobalt-bulldog
+  QC.Lic:
+    repos:
+      github.com/openaire/EPrints-OAPiwik licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-brown-goat.sh
+        container: qc.lic_cranky-indigo-molly
+  QC.Ver:
+    repos:
+      github.com/openaire/EPrints-OAPiwik get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-cinnabar-neanderthal.sh
+        container: qc.ver_nerdy-amber-gerbil
+timeout: 5400
